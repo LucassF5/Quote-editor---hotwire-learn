@@ -1,4 +1,4 @@
-quotes = ["First quote", "Second quote", "Third quote"]
+quotes = [ "First quote", "Second quote", "Third quote" ]
 
 quotes.each do |quote|
     Quote.create(name: quote)
