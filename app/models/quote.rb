@@ -10,5 +10,5 @@ class Quote < ApplicationRecord
   # after_destroy_commit -> { broadcast_remove_to "quotes" }
 
   # The above callbacks can be replaced with the following:
-  broadcast_to ->(quote) { "quotes" }, insert_bt: :prepend
+  broadcasts_to ->(quote) { "quotes" }, inserts_by: :prepend
 end
