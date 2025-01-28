@@ -1,4 +1,5 @@
-<%= turbo_stream_from "quotes" %>
+<%= turbo_stream_from current_company, "quotes" %>
+<%# The response of lambda is showed here, where is made the comparison of quote.company and current_company %> 
 
 <main class="container">
   <div class="header">

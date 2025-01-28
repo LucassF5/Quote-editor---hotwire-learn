@@ -10,5 +10,8 @@ class Quote < ApplicationRecord
   # after_destroy_commit -> { broadcast_remove_to "quotes" }
 
   # The above callbacks can be replaced with the following:
-  broadcasts_to ->(quote) { "quotes" }, inserts_by: :prepend
+  broadcasts_to ->(quote) { [ quote.company, "quotes" ] }, inserts_by: :prepend
+  # To broadcast to multiple streams, you must pass an array of streams
+  # Users who share broadcastings should have the lambda return an array with the same values.
+  # Users who shouldn't share broadcastings should have the lambda return an array with different values.
 end
