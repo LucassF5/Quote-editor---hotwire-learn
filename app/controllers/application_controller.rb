@@ -8,4 +8,9 @@ class ApplicationController < ActionController::Base
   def configure_permitted_parameters
     devise_parameter_sanitizer.permit(:sign_up, keys: [ :company_id ])
   end
+
+  def current_company
+    @current_company ||= current_user.company if user_signed_in?
+  end
+  helper_method :current_company
 end
