@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_02_01_045355) do
+ActiveRecord::Schema[8.0].define(version: 2025_02_03_144433) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -30,6 +30,17 @@ ActiveRecord::Schema[8.0].define(version: 2025_02_01_045355) do
     t.index ["quote_id"], name: "index_line_item_dates_on_quote_id"
   end
 
+  create_table "line_items", force: :cascade do |t|
+    t.bigint "line_item_date_id", null: false
+    t.string "name", null: false
+    t.text "description"
+    t.integer "quantity"
+    t.decimal "unit_price", precision: 10, scale: 2
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["line_item_date_id"], name: "index_line_items_on_line_item_date_id"
+  end
+
   create_table "quotes", force: :cascade do |t|
     t.string "name", null: false
     t.datetime "created_at", null: false
@@ -44,7 +55,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_02_01_045355) do
     t.string "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
-     t.datetime "created_at", null: false
+    t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "company_id", null: false
     t.index ["company_id"], name: "index_users_on_company_id"
@@ -53,6 +64,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_02_01_045355) do
   end
 
   add_foreign_key "line_item_dates", "quotes"
+  add_foreign_key "line_items", "line_item_dates"
   add_foreign_key "quotes", "companies"
   add_foreign_key "users", "companies"
 end
