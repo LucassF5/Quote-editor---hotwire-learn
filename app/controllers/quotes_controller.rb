@@ -59,3 +59,7 @@ class QuotesController < ApplicationController
     @quote = current_company.quotes.find(params[:id])
   end
 end
+
+escrevendo muitos testes
+teste
+teste
